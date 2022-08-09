@@ -19,10 +19,16 @@ public class Game {
 
     }
 
-    public Boolean checkCard(){
+    public Boolean checkCard(int cardNum){
         //check that is there smaller card in others players hand
 
-        return null;
+        for (Player player:
+             players) {
+            if (player.smallestCardNum().getNumber()<cardNum) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void useNinja(){
