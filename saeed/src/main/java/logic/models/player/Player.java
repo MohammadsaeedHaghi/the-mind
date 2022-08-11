@@ -3,6 +3,7 @@ package logic.models.player;
 import logic.Game;
 import logic.models.card.Card;
 
+import javax.xml.catalog.Catalog;
 import java.util.List;
 
 public abstract class Player{
@@ -12,8 +13,8 @@ public abstract class Player{
 
 
 
-    public void useCard(){
-
+    public void useCard(Card card){
+        cards.remove(card);
     }
 
 

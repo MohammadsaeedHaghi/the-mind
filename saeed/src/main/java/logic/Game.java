@@ -11,10 +11,12 @@ public class Game {
     private int level;
     private int hearts;
     private int ninjas;
+    private boolean started;
 
     public void nextRound(){
 
     }
+
     public void setCards(){
 
     }
@@ -29,4 +31,15 @@ public class Game {
 
     }
 
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public boolean isStarted() {
+        return started;
+    }
+
+    public void setStarted(boolean started) {
+        this.started = started;
+    }
 }
