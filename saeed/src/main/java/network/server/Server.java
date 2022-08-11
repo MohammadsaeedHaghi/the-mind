@@ -1,7 +1,6 @@
 package network.server;
 
 import logic.Game;
-import network.server.controller.enterController.EnterController;
 import network.shared.request.Request;
 import network.shared.response.Response;
 import network.shared.response.ResponseStatus;
@@ -73,6 +72,9 @@ public class Server {
             case LOGIN -> {
                 response = login((String) request.getData("name"));
             }
+            case PLAY_CARD -> {
+                response = playCard((String) request.getData("cardNum"));
+            }
 
 
         }
@@ -103,10 +105,14 @@ public class Server {
             response.setErrorMessage(message);
         } else{
             response = new Response(ResponseStatus.OK);
+            game.addPlayer(name);
             response.addData("name", name);
         }
         return response;
     }
 
+    private Response playCard(String cardNum){
+        return null;
+    }
 
 }

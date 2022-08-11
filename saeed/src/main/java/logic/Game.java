@@ -37,6 +37,10 @@ public class Game {
 
     }
 
+    public void addPlayer(String name){
+
+    }
+
     public List<Player> getPlayers() {
         return players;
     }

@@ -53,6 +53,6 @@ public class Client {
     }
 
     private void waitForStart() {
-
+        System.out.println("waiting...");
     }
 }
