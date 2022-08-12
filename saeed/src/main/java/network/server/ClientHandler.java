@@ -1,6 +1,8 @@
 package network.server;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import logic.models.player.Player;
+import logic.models.player.User;
 import network.server.controller.enterController.AuthTokenGenerator;
 import network.shared.request.Request;
 import network.shared.response.Response;
@@ -20,6 +22,21 @@ public class ClientHandler {
     private String token;
 
     private final int clientId;
+
+
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getToken() {
+        return token;
+    }
 
     public ClientHandler(int clientId, Server server, Socket socket) {
         this.clientId = clientId;

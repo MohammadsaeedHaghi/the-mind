@@ -14,6 +14,16 @@ public class Client {
     private final int port;
 
     private User user;
+    private String auth;
+
+    public String getAuth() {
+        return auth;
+    }
+
+    public void setAuth(String auth) {
+        this.auth = auth;
+    }
+
     public Client(int port) {
         this.port = port;
     }
@@ -29,7 +39,7 @@ public class Client {
     }
 
     private void loginCLI() {
-        System.out.println("enter Page:");
+        System.out.println("Login Page: exit>>0 login>>1");
 
         while (true) {
             int command = scanner.nextInt();
@@ -47,12 +57,13 @@ public class Client {
     }
 
     private void login(){
+        System.out.println("Enter your Name!");
         String name = scanner.nextLine();
 
         Response response = serverController.sendLoginRequest(name);
 
         if (response.getStatus() == ResponseStatus.OK) {
-
+            auth = response.getData("auth").toString();
             waitForStart();
         } else {
             System.err.println(response.getErrorMessage());
@@ -60,12 +71,24 @@ public class Client {
     }
 
     private void waitForStart() {
-        System.out.println("waiting...");
+        System.out.println("waiting... : startGame>>2");
         while (true){
+            int command = scanner.nextInt();
+            scanner.nextLine();
+
+            Integer startGame = Config.getConfig().getProperty(Integer.class, "startCode");
+            if(command==startGame){
+                Response response = serverController.startGameRequest(auth);
+                if(response.getStatus() == ResponseStatus.OK){
+                    goToGame();
+                }else {
+                    System.err.println(response.getErrorMessage());
+                }
+            }
             try {
                 Response response = serverController.isStartedRequest();
                 if (response.getStatus() == ResponseStatus.OK) {
-                    startGame();
+                    goToGame();
                 }
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -74,7 +97,7 @@ public class Client {
         }
     }
 
-    private void startGame(){
+    private void goToGame(){
         System.out.println("Game is started");
     }
 

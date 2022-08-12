@@ -45,6 +45,19 @@ public class ServerController {
         }
     }
 
+    public Response startGameRequest(String authToken){
+        Request request = new Request(RequestType.START_GAME);
+        request.addData("auth", authToken);
+        sendRequest(request);
+        Response response = null;
+        try {
+            response = objectMapper.readValue(scanner.nextLine(), Response.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
+
     public Response isStartedRequest(){
         Request request = new Request(RequestType.IS_STARTED);
         sendRequest(request);

@@ -71,14 +71,21 @@ public class Server {
         System.out.println(request);
         Response response = null;
         switch (request.getRequestType()) {
-            case LOGIN -> {
-                response = login((String) request.getData("name"));
+            case LOGIN : {
+                response = login((String) request.getData("name"), clientId);
+                break;
             }
-            case PLAY_CARD -> {
+            case PLAY_CARD : {
                 response = playCard((String) request.getData("cardNum"));
+                break;
             }
-            case IS_STARTED -> {
+            case IS_STARTED : {
                 response = checkStarted();
+                break;
+            }
+            case START_GAME:{
+                response = start((String) request.getData("auth"));
+                break;
             }
 
 
@@ -102,17 +109,37 @@ public class Server {
         }
     }
 //
-    private Response login(String name) {
+
+    private Response start(String auth){
+        Response response =null;
+        for (ClientHandler clientHandler:clients){
+            if(clientHandler.getToken().equals(auth)){
+                System.out.println("harrr");
+                if(clientHandler.getUser().isHost()){
+                    response = new Response(ResponseStatus.OK);
+                }else{
+                    response = new Response(ResponseStatus.ERROR);
+                    String message = "You are not Host!";
+                    response.setErrorMessage(message);
+                }
+            }
+        }
+        return response;
+    }
+
+    private Response login(String name, int clientId) {
         Response response;
+        ClientHandler clientHandler = getClientHandler(clientId);
         if(game.isStarted()){
             response = new Response(ResponseStatus.ERROR);
-            String message = Config.getConfig().getProperty(String.class, "game is started");
+            String message = "game is started";
             response.setErrorMessage(message);
         } else{
             response = new Response(ResponseStatus.OK);
             User user = new User(game, name);
             game.addPlayer(user);
-
+            clientHandler.setUser(user);
+            response.addData("auth", clientHandler.getToken());
             response.addData("name", name);
         }
         return response;

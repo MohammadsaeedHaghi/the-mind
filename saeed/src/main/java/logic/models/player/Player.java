@@ -12,10 +12,13 @@ public abstract class Player {
     private boolean host;
     private String name;
 
+
     public Player(Game game, String name) {
         this.game = game;
         this.name = name;
         host = false;
+        if(game.getPlayers().size()==0)
+            host = true;
     }
 
     public boolean isHost() {

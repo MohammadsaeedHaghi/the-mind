@@ -3,6 +3,7 @@ package logic;
 import logic.models.card.Card;
 import logic.models.player.Player;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Game {
@@ -15,6 +16,9 @@ public class Game {
     private GameStatus gameStatus;
 
 
+    public Game() {
+        players = new LinkedList<>();
+    }
 
     public void nextRound() {
             if (level == 12) {
@@ -73,7 +77,18 @@ public class Game {
     }
 
     public void useNinja() {
-
+            ninjas--;
+            List<Card> smallCards = new LinkedList<>();
+        for (Player player:
+             players) {
+            if (player.getCards().size() != 0 ) {
+                    smallCards.add(player.smallestCardNum());
+            }
+        }
+        for (Card card:
+             smallCards) {
+            removeSmallerCards(card);
+        }
     }
 
     public void addPlayer(Player player){
