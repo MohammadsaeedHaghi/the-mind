@@ -29,7 +29,7 @@ public class Client {
     }
 
     private void loginCLI() {
-        System.out.println("Login Page:");
+        System.out.println("Login Page: exit>>0 login>>1");
 
         while (true) {
             int command = scanner.nextInt();
@@ -47,12 +47,12 @@ public class Client {
     }
 
     private void login(){
+        System.out.println("Enter your Name!");
         String name = scanner.nextLine();
 
         Response response = serverController.sendLoginRequest(name);
 
         if (response.getStatus() == ResponseStatus.OK) {
-
             waitForStart();
         } else {
             System.err.println(response.getErrorMessage());
@@ -60,6 +60,6 @@ public class Client {
     }
 
     private void waitForStart() {
-        System.out.println("waiting...");
+        System.out.println("waiting to start...");
     }
 }

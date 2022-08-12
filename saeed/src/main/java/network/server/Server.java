@@ -71,11 +71,13 @@ public class Server {
         System.out.println(request);
         Response response = null;
         switch (request.getRequestType()) {
-            case LOGIN -> {
+            case LOGIN : {
                 response = login((String) request.getData("name"));
+                break;
             }
-            case PLAY_CARD -> {
+            case PLAY_CARD : {
                 response = playCard((String) request.getData("cardNum"));
+                break;
             }
 
 

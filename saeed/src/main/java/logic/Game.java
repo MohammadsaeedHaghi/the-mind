@@ -3,6 +3,7 @@ package logic;
 import logic.models.card.Card;
 import logic.models.player.Player;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Game {
@@ -13,6 +14,11 @@ public class Game {
     private int ninjas;
     private boolean started;
     private GameStatus gameStatus;
+
+
+    public Game() {
+        players = new LinkedList<>();
+    }
 
     public void nextRound() {
             if (level == 12) {
