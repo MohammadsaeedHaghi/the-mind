@@ -77,7 +77,18 @@ public class Game {
     }
 
     public void useNinja() {
-
+            ninjas--;
+            List<Card> smallCards = new LinkedList<>();
+        for (Player player:
+             players) {
+            if (player.getCards().size() != 0 ) {
+                    smallCards.add(player.smallestCardNum());
+            }
+        }
+        for (Card card:
+             smallCards) {
+            removeSmallerCards(card);
+        }
     }
 
     public void addPlayer(Player player){
