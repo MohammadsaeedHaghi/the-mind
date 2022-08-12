@@ -42,9 +42,10 @@ public class Game {
             removeSmallerCards(card);
         } else {
             removeCard(card, player);
-            if (cards.size() == 0) {
-                nextRound();
-            }
+        }
+
+        if (cards.size() == 0) {
+            nextRound();
         }
 
     }
@@ -88,6 +89,9 @@ public class Game {
         for (Card card:
              smallCards) {
             removeSmallerCards(card);
+        }
+        if (cards.size() == 0) {
+             nextRound();
         }
     }
 

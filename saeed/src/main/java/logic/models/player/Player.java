@@ -8,7 +8,6 @@ import java.util.List;
 public abstract class Player {
     private List<Card> cards;
     private Game game;
-
     private boolean host;
     private String name;
 
