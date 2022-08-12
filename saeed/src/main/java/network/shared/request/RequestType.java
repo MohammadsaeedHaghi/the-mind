@@ -7,5 +7,7 @@ public enum RequestType {
 
     PLAY_CARD,
 
-    USE_NINJA
+    USE_NINJA,
+
+    START_GAME
 }

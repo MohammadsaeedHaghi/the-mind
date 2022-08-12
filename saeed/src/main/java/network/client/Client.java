@@ -1,5 +1,6 @@
 package network.client;
 
+import logic.models.player.User;
 import network.shared.response.Response;
 import network.shared.response.ResponseStatus;
 import network.shared.util.Config;
@@ -12,8 +13,13 @@ public class Client {
     private ServerController serverController;
     private final int port;
 
+    private User user;
     public Client(int port) {
         this.port = port;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void start() {
@@ -46,6 +52,7 @@ public class Client {
         Response response = serverController.sendLoginRequest(name);
 
         if (response.getStatus() == ResponseStatus.OK) {
+
             waitForStart();
         } else {
             System.err.println(response.getErrorMessage());

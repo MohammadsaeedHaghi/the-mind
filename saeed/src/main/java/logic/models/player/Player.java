@@ -9,6 +9,22 @@ public abstract class Player {
     private List<Card> cards;
     private Game game;
 
+    private boolean host;
+    private String name;
+
+    public Player(Game game, String name) {
+        this.game = game;
+        this.name = name;
+        host = false;
+    }
+
+    public boolean isHost() {
+        return host;
+    }
+
+    public void setHost(boolean host) {
+        this.host = host;
+    }
 
     public void useCard(Card card) {
             game.setCards(smallestCardNum(), this);

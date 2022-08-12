@@ -74,8 +74,11 @@ public class Game {
 
     }
 
-    public void addPlayer(String name){
-
+    public void addPlayer(Player player){
+        this.players.add(player);
+        if(players.size() == 1){
+            player.setHost(true);
+        }
     }
 
     public List<Player> getPlayers() {

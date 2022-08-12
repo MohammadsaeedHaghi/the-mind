@@ -1,6 +1,8 @@
 package network.server;
 
 import logic.Game;
+import logic.models.player.Player;
+import logic.models.player.User;
 import network.shared.request.Request;
 import network.shared.response.Response;
 import network.shared.response.ResponseStatus;
@@ -105,7 +107,9 @@ public class Server {
             response.setErrorMessage(message);
         } else{
             response = new Response(ResponseStatus.OK);
-            game.addPlayer(name);
+            User user = new User(game, name);
+            game.addPlayer(user);
+
             response.addData("name", name);
         }
         return response;
