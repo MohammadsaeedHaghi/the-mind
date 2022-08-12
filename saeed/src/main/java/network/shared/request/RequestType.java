@@ -9,5 +9,7 @@ public enum RequestType {
 
     USE_NINJA,
 
-    START_GAME
+    START_GAME,
+
+    IS_STARTED
 }

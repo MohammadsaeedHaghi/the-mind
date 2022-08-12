@@ -29,7 +29,7 @@ public class Client {
     }
 
     private void loginCLI() {
-        System.out.println("Login Page:");
+        System.out.println("enter Page:");
 
         while (true) {
             int command = scanner.nextInt();
@@ -61,5 +61,21 @@ public class Client {
 
     private void waitForStart() {
         System.out.println("waiting...");
+        while (true){
+            try {
+                Response response = serverController.isStartedRequest();
+                if (response.getStatus() == ResponseStatus.OK) {
+                    startGame();
+                }
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
+
+    private void startGame(){
+        System.out.println("Game is started");
+    }
+
 }

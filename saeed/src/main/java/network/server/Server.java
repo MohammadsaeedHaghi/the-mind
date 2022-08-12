@@ -77,6 +77,9 @@ public class Server {
             case PLAY_CARD -> {
                 response = playCard((String) request.getData("cardNum"));
             }
+            case IS_STARTED -> {
+                response = checkStarted();
+            }
 
 
         }
@@ -117,6 +120,16 @@ public class Server {
 
     private Response playCard(String cardNum){
         return null;
+    }
+
+    private Response checkStarted(){
+        Response response;
+        if(game.isStarted())
+            response = new Response(ResponseStatus.OK);
+        else
+            response = new Response(ResponseStatus.ERROR);
+        return response;
+
     }
 
 }

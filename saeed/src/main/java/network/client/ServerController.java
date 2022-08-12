@@ -45,10 +45,22 @@ public class ServerController {
         }
     }
 
+    public Response isStartedRequest(){
+        Request request = new Request(RequestType.IS_STARTED);
+        sendRequest(request);
+        Response response = null;
+        try {
+            response = objectMapper.readValue(scanner.nextLine(), Response.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
     public Response sendLoginRequest(String name) {
         Request request = new Request(RequestType.LOGIN);
         request.addData("name", name);
         sendRequest(request);
+
 
         Response response = null;
         try {
